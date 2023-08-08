@@ -8,7 +8,32 @@ import {
 } from './styles'
 import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
 
+import * as z from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const newTransactionFormSchema = z.object({
+  description: z.string(),
+  price: z.number(),
+  category: z.string(),
+  type: z.enum(['income', 'outcome']),
+})
+
+type newTransactionFormInputs = z.infer<typeof newTransactionFormSchema>
+
 export default function NewTransactionModal() {
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm({
+    resolver: zodResolver(newTransactionFormSchema),
+  })
+
+  async function handleCreateNewTransaction(data: newTransactionFormInputs) {
+    console.log(data)
+  }
+
   return (
     <Dialog.Portal>
       <Overlay />
@@ -19,9 +44,10 @@ export default function NewTransactionModal() {
           <X size={24} />
         </CloseButton>
 
-        <form action=''>
+        <form onSubmit={handleSubmit(handleCreateNewTransaction)}>
           <input
             type='text'
+            {...register('description')}
             required
             placeholder='Descrição'
           />
@@ -29,11 +55,13 @@ export default function NewTransactionModal() {
             type='text'
             required
             placeholder='Preço'
+            {...register('price', { valueAsNumber: true })}
           />
           <input
             type='text'
             required
             placeholder='Categoria'
+            {...register('category')}
           />
 
           <TransactionType>
@@ -53,7 +81,12 @@ export default function NewTransactionModal() {
             </TransactionTypeButton>
           </TransactionType>
 
-          <button type='submit'>Cadastrar</button>
+          <button
+            disabled={isSubmitting}
+            type='submit'
+          >
+            Cadastrar
+          </button>
         </form>
       </Content>
     </Dialog.Portal>
