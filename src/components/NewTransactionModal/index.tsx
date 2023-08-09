@@ -43,9 +43,9 @@ export default function NewTransactionModal() {
   })
 
   async function handleCreateNewTransaction(data: NewTransactionFormInputs) {
-    createTransaction(data).then(() => {
-      reset()
-    })
+    createTransaction(data)
+
+    reset()
   }
 
   return (
