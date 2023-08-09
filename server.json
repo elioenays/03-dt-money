@@ -24,7 +24,6 @@
       "category": "Educação",
       "price": 1980,
       "createdAt": "2023-08-08T17:25:44.428Z"
-<<<<<<< HEAD
     },
     {
       "description": "Desenvolvimento de app",
@@ -44,8 +43,3 @@
     }
   ]
 }
-=======
-    }
-  ]
-}
->>>>>>> c7b5a9ac596a15b0eb3af7b96e08725e6e5b12af

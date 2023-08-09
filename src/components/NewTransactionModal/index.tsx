@@ -9,15 +9,10 @@ import {
 import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
 
 import * as z from 'zod'
-<<<<<<< HEAD
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useContext } from 'react'
 import { TransactionsContext } from '../../contexts/TransactionsContext'
-=======
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
->>>>>>> c7b5a9ac596a15b0eb3af7b96e08725e6e5b12af
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
@@ -26,22 +21,15 @@ const newTransactionFormSchema = z.object({
   type: z.enum(['income', 'outcome']),
 })
 
-<<<<<<< HEAD
 type NewTransactionFormInputs = z.infer<typeof newTransactionFormSchema>
 
 export default function NewTransactionModal() {
   const { createTransaction } = useContext(TransactionsContext)
 
-=======
-type newTransactionFormInputs = z.infer<typeof newTransactionFormSchema>
-
-export default function NewTransactionModal() {
->>>>>>> c7b5a9ac596a15b0eb3af7b96e08725e6e5b12af
   const {
     register,
     handleSubmit,
     formState: { isSubmitting },
-<<<<<<< HEAD
     control,
     reset,
   } = useForm<NewTransactionFormInputs>({
@@ -53,14 +41,6 @@ export default function NewTransactionModal() {
     createTransaction(data)
 
     reset()
-=======
-  } = useForm({
-    resolver: zodResolver(newTransactionFormSchema),
-  })
-
-  async function handleCreateNewTransaction(data: newTransactionFormInputs) {
-    console.log(data)
->>>>>>> c7b5a9ac596a15b0eb3af7b96e08725e6e5b12af
   }
 
   return (
