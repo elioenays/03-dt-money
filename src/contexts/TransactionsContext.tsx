@@ -48,15 +48,17 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     async (data: CreateTransactionInput) => {
       const { category, description, price, type } = data
 
-      const response = await api.post('transactions', {
-        description,
-        category,
-        price,
-        type,
-        createdAt: new Date(),
-      })
-
-      setTransactions((state) => [response.data, ...state])
+      await api
+        .post('transactions', {
+          description,
+          category,
+          price,
+          type,
+          createdAt: new Date(),
+        })
+        .then(({ data }) => {
+          setTransactions((state) => [data, ...state])
+        })
     },
     [],
   )
